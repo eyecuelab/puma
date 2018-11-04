@@ -275,6 +275,7 @@ module Puma
       server = start_server
 
       Signal.trap "SIGTERM" do
+        puts "got SIGTERM"
         server.stop
       end
 
@@ -386,6 +387,7 @@ module Puma
         # The worker installs their own SIGTERM when booted.
         # Until then, this is run by the worker and the worker
         # should just exit if they get it.
+        puts "got SIGTERM2"
         if Process.pid != master_pid
           log "Early termination of worker"
           exit! 0
@@ -468,6 +470,7 @@ module Puma
       spawn_workers
 
       Signal.trap "SIGINT" do
+        puts "got SIGINT3"
         stop
       end
 

@@ -395,6 +395,7 @@ module Puma
 
       begin
         Signal.trap "SIGTERM" do
+          puts "got SIGTERM4"
           graceful_stop
 
           raise SignalException, "SIGTERM"
@@ -405,6 +406,7 @@ module Puma
 
       begin
         Signal.trap "SIGINT" do
+          puts "got SIGINT5"
           if Puma.jruby?
             @status = :exit
             graceful_stop
@@ -419,6 +421,7 @@ module Puma
 
       begin
         Signal.trap "SIGHUP" do
+          puts "got SIGHUP6"
           if @runner.redirected_io?
             @runner.redirect_io
           else
